@@ -12,9 +12,12 @@ require(plyr)
 require(likert)
 require(reshape2)
 require(janitor)
-
+source("Y:\\Data\\Questionnaire\\Scripts\\rsurvey\\questfilt.R")
 
 likplot <- function(mydata){
+  
+  # Make sure we have the right ART names
+  mydata = questfilt(mydata,'all','all','fix')
   
   # Remove repondants that disagree with System Safety is relevant to my tasks
   # and then, remove question as it adds no info for this specific analysis.
@@ -62,7 +65,7 @@ likplot <- function(mydata){
   }
   
   # Generate graph and plot
-  item1 <- likert(data)
-  print(plot(item1) + theme(legend.text = element_text(size=15), axis.text=element_text(size=15)))
+  item1 <- likert(data, grouping = mydata$What.System.Team.or.ART.do.you.belong.too.)
+  print(plot(item1) + theme(legend.text = element_text(size=15), axis.text=element_text(size=10)))
   return(data)
 }
