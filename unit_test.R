@@ -3,8 +3,8 @@
 #
 
 require(testthat)
-source("Y:\\Data\\Questionnaire\\Scripts\\likplot.R")
-source("Y:\\Data\\Questionnaire\\Scripts\\sankeyplot.R")
+source("Y:\\Data\\Questionnaire\\Scripts\\rsurvey\\likplot.R")
+source("Y:\\Data\\Questionnaire\\Scripts\\rsurvey\\sankeyplot.R")
 
 mydata <- read.delim("Y:\\Data\\Questionnaire\\unit_test\\System Safety Survey171.csv", sep = ';')
 
