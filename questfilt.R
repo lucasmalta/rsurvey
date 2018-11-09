@@ -82,6 +82,7 @@ questfilt <- function(mydata, ismanager, art, setother){
     stop("ERROR: Wrong syntax. Allowed: ad, adas, protective, vmc")
   }
   
+  mydata = droplevels(mydata)
   return(mydata)
   
 }
