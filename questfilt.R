@@ -72,7 +72,7 @@ questfilt <- function(mydata, ismanager, art, setother){
   else if (art=='all'){}
   else
   {
-    stop("ERROR: Wrong manager syntax. Allowed: ad, adas, protective, vmc")
+    stop("ERROR: Wrong syntax. Allowed: ad, adas, protective, vmc")
   }
   
   return(mydata)
