@@ -14,22 +14,6 @@ require(janitor)
 
 sankeyplot <- function(mydata, question, ismanager){
   
-  # Filter data
-  if(ismanager=='manager'){
-    managers = subset(mydata, Are.you.in.one.of.these.roles..PO..PM..RTE..STE..Solution.Manager..Solution.Architect..System.Architect..SPE..Line.Manager.=='Yes')
-    mydata = managers
-  }
-  else if (ismanager=='non_manager')
-  { 
-    non_managers = subset(mydata, Are.you.in.one.of.these.roles..PO..PM..RTE..STE..Solution.Manager..Solution.Architect..System.Architect..SPE..Line.Manager.=='No')
-    mydata = non_managers
-  }
-  else if (ismanager=='all'){}
-  else
-  {
-    stop("ERROR: Wrong manager syntax. Allowed: manager, non_manager, all")
-  }
-  
   # Remove repondants that disagree with System Safety is relevant to my tasks
   # and then, remove question as it adds no info for this specific analysis.
   # We also need to fix levels
@@ -52,34 +36,6 @@ sankeyplot <- function(mydata, question, ismanager){
     I.clearly.understand.what.I.need.to.deliver.in.regards.to.System.Safety. = "I clearly understand what I need to deliver in regards to System Safety.", 
     My.team.s.System.Safety.related.activities.are.completed.on.time. = "My team's System Safety related activities are completed on time." 
   ))
-  
-  # Fix levels manually
-  levels(data$What.System.Team.or.ART.do.you.belong.too.) <- tolower(levels(data$What.System.Team.or.ART.do.you.belong.too.))
-  levels(data$What.System.Team.or.ART.do.you.belong.too.)[levels(data$What.System.Team.or.ART.do.you.belong.too.)=="adas to w48, thereafter ad"] <- "ADAS"
-  
-  # Convert all related levels to the same name
-  ad_options = grep('\\<ad\\>|ad |autonomous|adfsp', levels(data$What.System.Team.or.ART.do.you.belong.too.), value = TRUE)
-  adas_options = grep('advanced driving |advanced driver |adas|active safety', levels(data$What.System.Team.or.ART.do.you.belong.too.), value = TRUE)
-  protective_options = grep('protective|prosaf', levels(data$What.System.Team.or.ART.do.you.belong.too.), value = TRUE)
-  vmc_options = grep('motion and control|vehicle motion|vmc', levels(data$What.System.Team.or.ART.do.you.belong.too.), value = TRUE)
-  
-  for (i in ad_options){
-    levels(data$What.System.Team.or.ART.do.you.belong.too.)[levels(data$What.System.Team.or.ART.do.you.belong.too.)==i] <- "AD"
-  }
-  for (i in adas_options){
-    levels(data$What.System.Team.or.ART.do.you.belong.too.)[levels(data$What.System.Team.or.ART.do.you.belong.too.)==i] <- "ADAS"
-  }
-  for (i in protective_options){
-    levels(data$What.System.Team.or.ART.do.you.belong.too.)[levels(data$What.System.Team.or.ART.do.you.belong.too.)==i] <- "PROTECTIVE"
-  }
-  for (i in vmc_options){
-    levels(data$What.System.Team.or.ART.do.you.belong.too.)[levels(data$What.System.Team.or.ART.do.you.belong.too.)==i] <- "VMC"
-  }
-  
-  # Set other levels to Other
-  w = levels(data$What.System.Team.or.ART.do.you.belong.too.)
-  w[!(levels(data$What.System.Team.or.ART.do.you.belong.too.) %in% c('ADAS','AD','PROTECTIVE','VMC'))] <- 'Other'
-  levels(data$What.System.Team.or.ART.do.you.belong.too.) <- w
   
   # Stack data per team name
   stack_team <- melt(data, id = c("What.System.Team.or.ART.do.you.belong.too."))

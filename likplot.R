@@ -14,23 +14,7 @@ require(reshape2)
 require(janitor)
 
 
-likplot <- function(mydata, ismanager){
-  
-  # Filter data
-  if(ismanager=='manager'){
-    managers = subset(mydata, Are.you.in.one.of.these.roles..PO..PM..RTE..STE..Solution.Manager..Solution.Architect..System.Architect..SPE..Line.Manager.=='Yes')
-    mydata = managers
-  }
-  else if (ismanager=='non_manager')
-  { 
-    non_managers = subset(mydata, Are.you.in.one.of.these.roles..PO..PM..RTE..STE..Solution.Manager..Solution.Architect..System.Architect..SPE..Line.Manager.=='No')
-    mydata = non_managers
-  }
-  else if (ismanager=='all'){}
-  else
-  {
-    stop("ERROR: Wrong manager syntax. Allowed: manager, non_manager, all")
-  }
+likplot <- function(mydata){
   
   # Remove repondants that disagree with System Safety is relevant to my tasks
   # and then, remove question as it adds no info for this specific analysis.
