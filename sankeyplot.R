@@ -1,6 +1,6 @@
 #
 # Questionnaire data analysis
-# Generates a Likert diverging stacked bar
+# Generates a Sankey plot
 # 
 # Lucas Malta
 # Carabiner 2018
