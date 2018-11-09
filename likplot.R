@@ -65,7 +65,14 @@ likplot <- function(mydata){
   }
   
   # Generate graph and plot
-  item1 <- likert(data, grouping = mydata$What.System.Team.or.ART.do.you.belong.too.)
+  if(length(levels(data$What.System.Team.or.ART.do.you.belong.too.)) > 1){
+    item1 <- likert(data, grouping = mydata$What.System.Team.or.ART.do.you.belong.too.)
+  }
+  else
+  {
+    item1 <- likert(data)
+  }
   print(plot(item1) + theme(legend.text = element_text(size=15), axis.text=element_text(size=10)))
+  
   return(data)
 }
