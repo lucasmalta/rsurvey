@@ -11,8 +11,12 @@ require(googleVis)
 require(plyr)
 require(reshape2)
 require(janitor)
+source("Y:\\Data\\Questionnaire\\Scripts\\rsurvey\\questfilt.R")
 
 sankeyplot <- function(mydata, question, ismanager){
+  
+  # Make sure we have the right ART names
+  mydata = questfilt(mydata,'all','all','fix')
   
   # Remove repondants that disagree with System Safety is relevant to my tasks
   # and then, remove question as it adds no info for this specific analysis.
