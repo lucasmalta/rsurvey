@@ -47,10 +47,17 @@ questfilt <- function(mydata, ismanager, art, setother){
   }
   
   # Set other levels to Other
-  if (setother){
+  if (setother=='fix'){
     w = levels(mydata$What.System.Team.or.ART.do.you.belong.too.)
     w[!(levels(mydata$What.System.Team.or.ART.do.you.belong.too.) %in% c('ADAS','AD','PROTECTIVE','VMC'))] <- 'Other'
     levels(mydata$What.System.Team.or.ART.do.you.belong.too.) <- w
+  }
+  else if (setother=='keep'){}
+  else if (setother=='del'){
+    w = levels(mydata$What.System.Team.or.ART.do.you.belong.too.)
+    w[!(levels(mydata$What.System.Team.or.ART.do.you.belong.too.) %in% c('ADAS','AD','PROTECTIVE','VMC'))] <- 'Other'
+    levels(mydata$What.System.Team.or.ART.do.you.belong.too.) <- w
+    mydata = subset(mydata, mydata$What.System.Team.or.ART.do.you.belong.too. != 'Other')
   }
   
   # Filter data concerning ART
