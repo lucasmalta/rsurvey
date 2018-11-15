@@ -28,9 +28,9 @@ questfilt <- function(mydata, ismanager, art, setother){
   levels(mydata$What.System.Team.or.ART.do.you.belong.too.)[levels(mydata$What.System.Team.or.ART.do.you.belong.too.)=="adas to w48, thereafter ad"] <- "ADAS"
   
   # Convert all related levels to the same name
-  ad_options = grep('\\<ad\\>|ad |autonomous|adfsp', levels(mydata$What.System.Team.or.ART.do.you.belong.too.), value = TRUE)
+  ad_options = grep('\\<ad\\>|ad |autonomous|adfsp|adf&sp', levels(mydata$What.System.Team.or.ART.do.you.belong.too.), value = TRUE)
   adas_options = grep('advanced driving |advanced driver |adas|active safety', levels(mydata$What.System.Team.or.ART.do.you.belong.too.), value = TRUE)
-  protective_options = grep('protective|prosaf', levels(mydata$What.System.Team.or.ART.do.you.belong.too.), value = TRUE)
+  protective_options = grep('protective|prosaf|passive saftey', levels(mydata$What.System.Team.or.ART.do.you.belong.too.), value = TRUE)
   vmc_options = grep('motion and control|vehicle motion|vmc', levels(mydata$What.System.Team.or.ART.do.you.belong.too.), value = TRUE)
   
   for (i in ad_options){
