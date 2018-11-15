@@ -65,7 +65,7 @@ likplot <- function(mydata){
   }
   
   # Generate graph and plot
-  if(length(levels(data$What.System.Team.or.ART.do.you.belong.too.)) > 1){
+  if(length(levels(mydata$What.System.Team.or.ART.do.you.belong.too.)) > 1){
     item1 <- likert(data, grouping = mydata$What.System.Team.or.ART.do.you.belong.too.)
   }
   else
