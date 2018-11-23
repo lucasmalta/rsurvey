@@ -14,7 +14,7 @@ require(reshape2)
 require(janitor)
 source("Y:\\Data\\Questionnaire\\Scripts\\rsurvey\\questfilt.R")
 
-likplot <- function(mydata){
+likplot <- function(mydata, question){
   
   # Make sure we have the right ART names
   mydata = questfilt(mydata,'all','all','fix')
@@ -65,8 +65,8 @@ likplot <- function(mydata){
   }
   
   # Generate graph and plot
-  if(length(levels(mydata$What.System.Team.or.ART.do.you.belong.too.)) > 1){
-    item1 <- likert(data, grouping = mydata$What.System.Team.or.ART.do.you.belong.too.)
+  if(length(levels(mydata[,question])) > 1){
+    item1 <- likert(data, grouping = mydata[,question])
   }
   else
   {
