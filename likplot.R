@@ -14,7 +14,14 @@ require(reshape2)
 require(janitor)
 source("Y:\\Data\\Questionnaire\\Scripts\\rsurvey\\questfilt.R")
 
-likplot <- function(mydata, question){
+likplot <- function(mydata, question, palcolors){
+  
+  if(missing(question)) {
+    stop("ERROR: Wrong syntax. Missing question.")
+  }
+  if(missing(palcolors)) {
+    palcolors = c( "#D8B365","#5AB4AC")
+  }
   
   # Make sure we have the right ART names
   mydata = questfilt(mydata,'all','all','fix')
@@ -72,7 +79,7 @@ likplot <- function(mydata, question){
   {
     item1 <- likert(data)
   }
-  print(plot(item1) + theme(legend.text = element_text(size=15), axis.text=element_text(size=10)))
+  print(plot(item1, low.color = palcolors[1], high.color = palcolors[2]) + theme(legend.text = element_text(size=15), axis.text=element_text(size=10)))
   
   return(data)
 }
