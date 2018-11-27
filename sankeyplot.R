@@ -29,17 +29,8 @@ sankeyplot <- function(mydata, question, ismanager){
   drop_cols = c('Start.time','Completion.time','Email','Name','Please.state.your.Agile.team.s.name.','Do.you.have.any.comments.or.suggestions.regarding.System.Safety.activities.in.general.or.regarding.this.survey.','Are.you.in.one.of.these.roles..PO..PM..RTE..STE..Solution.Manager..Solution.Architect..System.Architect..SPE..Line.Manager.')
   data = mydata[ , !(names(mydata) %in% drop_cols)]
   
-  # Rename column names
-  data <- rename(data, c(
-    I.have.the.necessary.knowledge.on.System.Safety.to.perform.my.tasks. = "I have the necessary knowledge on System Safety to perform my tasks", 
-    I.feel.that.the.organization.demonstrates.the.importance.of.System.Safety.activities..e.g..Systems.Safety.is.prioritized.in.planning.and.execution..resources.are.selected.properly..proper.follow.u... = "I feel that the organization demonstrates the importance of System Safety", 
-    I.know.how.to.find.experts.to.support.me.on.System.Safety. = "I know how to find experts to support me on System Safety", 
-    I.know.where.to.find.information.on.instructions..guidelines..processes.or.templates.to.perform.my.tasks.that.are.System.Safety.relevant. = "I know where to find information on instructions, guidelines, processes or templates", 
-    It.is.clear.to.me.how.the.available.System.Safety.instructions..guidelines..processes.and.templates.shall.be.used. = "It is clear to me how the available System Safety instructions, guidelines, processes and templates shall be used.", 
-    I.am.responsible.to.contribute.to.System.Safety.related.activities. = "I am responsible to contribute to System Safety related activities.", 
-    I.clearly.understand.what.I.need.to.deliver.in.regards.to.System.Safety. = "I clearly understand what I need to deliver in regards to System Safety.", 
-    My.team.s.System.Safety.related.activities.are.completed.on.time. = "My team's System Safety related activities are completed on time." 
-  ))
+  # Fix levels
+  data[1:8] <- lapply(data[1:8], factor, levels=c('Strongly disagree','Disagree','Agree','Strongly agree'))
   
   # Stack data per team name
   stack_team <- melt(data, id = c("What.System.Team.or.ART.do.you.belong.too."))
