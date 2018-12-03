@@ -57,7 +57,8 @@ likplot <- function(mydata, question, palcolors){
   
   # Append missing levels
   n.levels   <- sapply(data,nlevels)
-  max.levels <- levels(data[,which.max(n.levels)])
+  #max.levels <- levels(data[,which.max(n.levels)])
+  max.levels <- c('Strongly disagree','Disagree','Agree','Strongly agree')
   
   for (i in seq_along(data)) {
     mis.lev = which(!max.levels %in% levels(data[,i]))
@@ -79,7 +80,8 @@ likplot <- function(mydata, question, palcolors){
   {
     item1 <- likert(data)
   }
-  print(plot(item1, low.color = palcolors[1], high.color = palcolors[2]) + theme(legend.text = element_text(size=15), axis.text=element_text(size=10)))
+  #print(plot(item1, low.color = palcolors[1], high.color = palcolors[2]) + theme(legend.text = element_text(size=13), plot.title = element_text(size=16) , axis.text=element_text(size=12)))
+  print(plot(item1, low.color = palcolors[1], high.color = palcolors[2]) + theme(text = element_text(size=14)))
   
   return(data)
 }
