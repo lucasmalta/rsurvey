@@ -37,7 +37,7 @@ replaceteam <- function(mydata){
   
 
   #AD
-  drive1_ad = grep('drive 1|drive1', levels(mydata$Please.state.your.Agile.team.s.name.), value = TRUE)
+  drive1_ad = grep('drive 1|drive1|drivex', levels(mydata$Please.state.your.Agile.team.s.name.), value = TRUE)
   drive2_ad = grep('drive 2', levels(mydata$Please.state.your.Agile.team.s.name.), value = TRUE)
   drive3_ad = grep('drive 3|lund|drive #3', levels(mydata$Please.state.your.Agile.team.s.name.), value = TRUE)
   scenario_ad = grep('scenario', levels(mydata$Please.state.your.Agile.team.s.name.), value = TRUE)
